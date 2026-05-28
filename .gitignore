@@ -1,0 +1,14 @@
+build/
+data/
+test_data/
+*.exe
+*.o
+*.obj
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.log
+.vs/
+.vscode/
