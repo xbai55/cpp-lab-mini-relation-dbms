@@ -155,6 +155,14 @@ Then enter SQL commands in the client prompt.
 
 ## Test
 
+The recommended way is to use CTest to run both the unit tests and the client/server smoke test:
+
+```bash
+ctest --test-dir build --output-on-failure
+```
+
+You can also run the core test executable directly:
+
 ```bash
 ./build/mini_db_tests
 ```
@@ -169,6 +177,8 @@ The test program covers:
 - table creation, table deletion, insert, select, update, and delete workflows
 - primary-key duplicate checks
 - common error-handling branches
+
+The script `tests/smoke_client_server.sh` starts the server automatically, sends a SQL session through the client, and checks the output after query, update, and delete operations. It is useful for simulating a basic manual trial run.
 
 ## Design Notes
 
@@ -190,4 +200,3 @@ The current implementation covers the minimum functional requirements of the pro
 - self-written test program
 
 Project reports, score sheets, and final packaging should still follow the course submission template and naming rules.
-

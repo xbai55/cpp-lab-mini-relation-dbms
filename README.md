@@ -155,6 +155,14 @@ cmake --build build
 
 ## 测试方法
 
+推荐使用 CTest 一次性运行单元测试和客户端/服务端冒烟测试：
+
+```bash
+ctest --test-dir build --output-on-failure
+```
+
+也可以单独运行核心测试程序：
+
 ```bash
 ./build/mini_db_tests
 ```
@@ -169,6 +177,8 @@ cmake --build build
 - 表创建、表删除、插入、查询、更新和删除流程
 - 主键重复检查
 - 常见错误处理分支
+
+其中 `tests/smoke_client_server.sh` 会自动启动服务端，通过客户端执行一组 SQL，并检查查询、更新、删除后的输出结果，适合模拟老师手动试用时的基本流程。
 
 ## 设计说明
 
@@ -190,4 +200,3 @@ cmake --build build
 - 自编写测试程序
 
 项目报告、评分表和最终压缩包仍需按照课程模板和命名规则整理。
-
