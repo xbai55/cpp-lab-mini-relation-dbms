@@ -9,9 +9,9 @@
 
 ## Introduction
 
-Mini Relation DBMS is a course project for **Modern C++ Programming**. It implements a lightweight relational database management system inspired by the basic interactive workflow of MySQL.
+Mini Relation DBMS is a lightweight relational database management system that provides a MySQL-like command-line SQL experience.
 
-The project includes SQL parsing, file-based table storage, primary-key indexing with a B+ tree, TCP client/server communication, a command-line interface, and a self-written test program. It is not intended to be a production database, but a teaching-oriented system that demonstrates how core database components work together.
+The project includes SQL parsing, file-based table storage, primary-key indexing with a B+ tree, TCP client/server communication, a command-line interface, and an automated test workflow. Its modules are organized around core database capabilities, making the system straightforward to build, run, test, and extend.
 
 ## Architecture Overview
 
@@ -37,7 +37,7 @@ The project includes SQL parsing, file-based table storage, primary-key indexing
 | Index | B+ tree index for primary-key columns |
 | Architecture | Separate server and client using TCP sockets |
 | Interface | MySQL-like command-line input and table-style output |
-| Tests | Test executable covering core course requirements |
+| Tests | Unit tests and client/server smoke test |
 
 ## Supported SQL
 
@@ -94,6 +94,7 @@ exit
 |       |-- bptree.cpp
 |       `-- database.cpp
 |-- tests/
+|   |-- smoke_client_server.sh
 |   `-- test_main.cpp
 |-- CMakeLists.txt
 |-- config.md
@@ -113,7 +114,7 @@ data/
 
 ## Build Requirements
 
-The target evaluation environment is Linux.
+Linux is the recommended build and runtime environment.
 
 | Requirement | Version |
 | --- | --- |
@@ -167,7 +168,7 @@ You can also run the core test executable directly:
 ./build/mini_db_tests
 ```
 
-The test program covers:
+The tests cover:
 
 - `MiniVector` dynamic array behavior
 - DDL and DML parsing
@@ -178,25 +179,20 @@ The test program covers:
 - primary-key duplicate checks
 - common error-handling branches
 
-The script `tests/smoke_client_server.sh` starts the server automatically, sends a SQL session through the client, and checks the output after query, update, and delete operations. It is useful for simulating a basic manual trial run.
+The script `tests/smoke_client_server.sh` starts the server automatically, sends a SQL session through the client, and checks the output after query, update, and delete operations.
 
 ## Design Notes
 
-This project follows the course requirement of avoiding STL standard containers such as `vector`, `map`, `set`, `list`, and `deque`. A custom `MiniVector` template is used for dynamic sequence storage.
-
-Table and column names should use lowercase English letters only, with no underscores or special characters. String values must be wrapped in double quotes, for example `"peter"`.
+The project uses a custom `MiniVector` template for dynamic sequence storage and avoids relying on STL standard containers in core data structures. Table and column names should use lowercase English letters only, with no underscores or special characters. String values must be wrapped in double quotes, for example `"peter"`.
 
 ## Status
 
-The current implementation covers the minimum functional requirements of the project specification:
+The current implementation includes:
 
 - file-based storage
-- required DDL statements
-- required DML statements
+- DDL and DML execution
 - B+ tree index for primary keys
 - client/server separation
 - TCP communication
 - command-line interaction
-- self-written test program
-
-Project reports, score sheets, and final packaging should still follow the course submission template and naming rules.
+- automated tests
