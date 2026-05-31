@@ -30,8 +30,12 @@ endif()
 add_executable(mini_db_tests tests/test_main.cpp)
 target_link_libraries(mini_db_tests PRIVATE mini_db_core)
 
+add_executable(mini_db_stress_tests tests/stress_main.cpp)
+target_link_libraries(mini_db_stress_tests PRIVATE mini_db_core)
+
 enable_testing()
 add_test(NAME mini_db_unit_tests COMMAND mini_db_tests)
+add_test(NAME mini_db_stress_tests COMMAND mini_db_stress_tests)
 
 if(UNIX)
     add_test(
